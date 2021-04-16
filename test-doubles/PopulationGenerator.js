@@ -5,7 +5,7 @@ module.exports = function(){
         generate
     })
 
-    async function generate(){
-        return Population()
+    async function generate({size, intentions}){
+        return Population({size, intentions})
     }
 }
