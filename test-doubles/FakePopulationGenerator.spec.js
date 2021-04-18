@@ -1,5 +1,5 @@
 const { expect } = require("chai")
-const Generator = require('./PopulationGenerator')
+const Generator = require('./FakePopulationGenerator')
 
 describe('PopulationGenerator', function(){
     let generator
@@ -9,10 +9,10 @@ describe('PopulationGenerator', function(){
 
         this.givenPopulation = async function ({size, Apercentage, Bpercentage}){
             return await generator.generate({
-                size: '10',
+                size,
                 intentions: [
-                    {intention: 'A', percentage: '50'},
-                    {intention: 'B', percentage: '50'}
+                    {intention: 'A', percentage: Apercentage},
+                    {intention: 'B', percentage: Bpercentage}
                 ]
             })
         }
@@ -34,12 +34,29 @@ describe('PopulationGenerator', function(){
     })
 
     it('must create a population with 50% of the members voting one option and 50% other option', async function(){
-        var population = this.givenPopulation({size:10, Apercentage:50, Bpercentage:50})
-        this.assertPopulation({population, expectedSize:10, Aindividuals: 5, Bindividuals: 5})
+        var population = await this.givenPopulation({size:10, Apercentage:50, Bpercentage:50})
+        await this.assertPopulation({population, expectedSize:10, Aindividuals: 5, Bindividuals: 5})
     })
 
     it('must create a population with 80% of the members voting one option and 20% other option', async function(){
-        var population = this.givenPopulation({size:100, Apercentage:80, Bpercentage:20})
-        this.assertPopulation({population, expectedSize:100, Aindividuals: 80, Bindividuals: 20})
+        var population = await this.givenPopulation({size:100, Apercentage:80, Bpercentage:20})
+        await this.assertPopulation({population, expectedSize:100, Aindividuals: 80, Bindividuals: 20})
+    })
+
+    it('must shuffle the elements', async function(){
+        var intentions = []
+        for(var i =0; i<100; i++){
+            var population = await this.givenPopulation({size: 100, Apercentage: 50, Bpercentage:50})
+            intentions.push(await population.askIntentionTo(0))
+        }
+        
+        var intentionA = 0
+        var intentionB = 0
+        for(var intention of intentions){
+            if(intention === 'A') intentionA++
+            if(intention === 'B') intentionB++
+        }
+
+        expect(Math.abs(intentionA-intentionB)).to.be.lessThan(50)
     })
 })

@@ -1,4 +1,4 @@
-const Population = require("./Population")
+const FakePopulation = require("./FakePopulation")
 
 module.exports = function(){
     return Object.freeze({
@@ -6,6 +6,6 @@ module.exports = function(){
     })
 
     async function generate({size, intentions}){
-        return Population({size, intentions})
+        return FakePopulation({size, intentions})
     }
 }
