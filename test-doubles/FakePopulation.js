@@ -1,5 +1,6 @@
 module.exports = function({size, intentions}){
     var individuals = []
+    var askedIndividuals = 0
 
     for(var intention of intentions){
         var individualsWIthIntention = size*(intention.percentage/100)
@@ -28,7 +29,8 @@ module.exports = function({size, intentions}){
 
     return Object.freeze({
         getSize,
-        askIntentionTo
+        askIntentionTo,
+        getAskedIndividuals
     })
 
     async function getSize(){
@@ -36,6 +38,11 @@ module.exports = function({size, intentions}){
     }
 
     async function askIntentionTo(i){
+        askedIndividuals++
         return individuals[i]
+    }
+
+    async function getAskedIndividuals(){
+        return askedIndividuals
     }
 }

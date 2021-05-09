@@ -59,4 +59,13 @@ describe('PopulationGenerator', function(){
 
         expect(Math.abs(intentionA-intentionB)).to.be.lessThan(50)
     })
+
+    it('must return the people that was asked', async function(){
+        for(var askedIndividuals = 1; askedIndividuals<5; askedIndividuals++){
+            console.log(askedIndividuals)
+            var population = await this.givenPopulation({size: 100, Apercentage: 50, Bpercentage:50})
+            for(var i =0; i<askedIndividuals; i++) await population.askIntentionTo(i)
+            expect(await population.getAskedIndividuals()).to.equal(askedIndividuals)
+        }
+    })
 })

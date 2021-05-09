@@ -19,7 +19,7 @@
     "test-domain": "mocha domain --recursive",
     "test-doubles": "mocha test-doubles --recursive",
     "test-adapters": "mocha adapters --recursive",
-    "test-integration": "mocha test-integration --recursive",
+    "test-integration": "mocha test-integration --recursive --timeout 300000",
     "test-mutation": "npx stryker run",
     "test-cucumber": "cucumber-js",
     "configure-deployment": "gem install travis && travis setup npm --com",
