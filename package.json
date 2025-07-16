@@ -10,7 +10,7 @@
     "chai": "5.2.1",
     "cucumber": "6.0.7",
     "mocha": "11.7.1",
-    "release-it": "19.0.3"
+    "release-it": "19.0.4"
   },
   "scripts": {
     "release": "release-it",
