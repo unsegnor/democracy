@@ -9,7 +9,7 @@
     "@stryker-mutator/mocha-runner": "9.0.0",
     "chai": "6.2.0",
     "cucumber": "6.0.7",
-    "mocha": "11.7.2",
+    "mocha": "11.7.3",
     "release-it": "19.0.5"
   },
   "scripts": {
